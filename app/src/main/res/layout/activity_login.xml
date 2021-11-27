@@ -85,7 +85,7 @@
         android:background="@drawable/border"
         android:ems="13"
         android:hint="Enter your name"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:textColor="@color/black"
         android:textColorHint="@color/cardview_shadow_start_color" />
 
@@ -100,6 +100,7 @@
         android:ems="13"
         android:hint="Enter your Phone number"
         android:inputType="text"
+        android:maxLength="10"
         android:textColor="@color/black"
         android:textColorHint="@color/cardview_shadow_start_color" />
 

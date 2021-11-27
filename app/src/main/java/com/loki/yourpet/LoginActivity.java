@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -14,6 +15,12 @@ import butterknife.ButterKnife;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.loginButton) Button mLoginButton;
+    @BindView(R.id.editTextPersonName) EditText mPersonName;
+    @BindView(R.id.editTextPersonPhone) EditText mPersonPhone;
+    @BindView(R.id.editTextPersonEmail) EditText mPersonEmail;
+    @BindView(R.id.editTextPersonPassword) EditText mPersonPassword;
+
+    Boolean isAllFieldsChecked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +34,35 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if(v == mLoginButton) {
-            Intent intent = new Intent(LoginActivity.this,PetListActivity.class);
+        if(v == mLoginButton && isAllFieldsChecked) {
+            Intent intent = new Intent(LoginActivity.this, PetListActivity.class);
             startActivity(intent);
         }
+        isAllFieldsChecked = checkAllFields();
+    }
+
+    private Boolean checkAllFields() {
+
+        if(mPersonName.length() == 0 ){
+            mPersonName.setError("please input your name");
+            return false;
+        }
+        if(mPersonPhone.length() == 0 ) {
+            mPersonPhone.setError("please input your phone number");
+            return false;
+        }
+        if(mPersonEmail.length() == 0 ) {
+            mPersonEmail.setError("please input your email");
+            return false;
+        }
+        if (mPersonPassword.length() == 0 ) {
+            mPersonPassword.setError("please enter your password");
+            return false;
+        }
+        else if(mPersonPassword.length() < 8 ) {
+            mPersonPassword.setError("password must be minimum 8 characters");
+            return false;
+        }
+        return true;
     }
 }
