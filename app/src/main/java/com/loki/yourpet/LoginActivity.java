@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +37,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         if(v == mLoginButton && isAllFieldsChecked) {
             Intent intent = new Intent(LoginActivity.this, PetListActivity.class);
+            Toast.makeText(getApplicationContext(),"Login successfully",Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
         isAllFieldsChecked = checkAllFields();
