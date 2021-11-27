@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YourPet">
         <activity
+            android:name=".PetListActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
