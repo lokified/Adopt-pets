@@ -8,10 +8,23 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:scaleType="centerCrop"
         app:srcCompat="@drawable/pet1" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="78dp"
+        android:layout_marginTop="16dp"
+        android:text="Welcome"
+        android:textSize="60sp"
+        android:textStyle="bold" />
 </RelativeLayout>
