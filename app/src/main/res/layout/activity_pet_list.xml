@@ -8,7 +8,7 @@
     android:id="@+id/mainList">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/welcomeImage"
         android:layout_width="412dp"
         android:layout_height="449dp"
         android:layout_alignParentStart="true"
@@ -67,7 +67,7 @@
         android:text="Organisations" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textViewAdopt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -79,6 +79,14 @@
         android:textColor="@color/oil"
         android:textSize="25sp"
         android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/petList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewAdopt"
+        android:layout_marginBottom="5dp">
+    </ListView>
 
 
 </RelativeLayout>
