@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 
 public class PetListActivity extends AppCompatActivity{
 
-    @BindView(R.id.petsTextView) TextView profileName;
+    @BindView(R.id.welcomeTextView) TextView profileName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +25,11 @@ public class PetListActivity extends AppCompatActivity{
         setContentView(R.layout.activity_pet_list);
         ButterKnife.bind(this);
 
-        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.action_bg));
 
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
-        profileName.setText("Welcome to Your Pet service " + name);
+        profileName.setText("Welcome \n" + name + "!");
 
     }
 
