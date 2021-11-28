@@ -30,7 +30,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp"
         android:text="Adopt the perfect pet from more than 17,000 animal shelters and rescues"
-        android:textColor="@color/black"
+        android:textColor="@color/oil"
         android:textAlignment="center"
         android:fontFamily="@font/roboto"
         android:textSize="20sp"/>

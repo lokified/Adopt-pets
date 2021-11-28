@@ -36,8 +36,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         if(v == mLoginButton && isAllFieldsChecked) {
+            String name = mPersonName.getEditableText().toString();
             Intent intent = new Intent(LoginActivity.this, PetListActivity.class);
             Toast.makeText(getApplicationContext(),"Login successfully",Toast.LENGTH_SHORT).show();
+            intent.putExtra("name",name);
             startActivity(intent);
         }
         isAllFieldsChecked = checkAllFields();
