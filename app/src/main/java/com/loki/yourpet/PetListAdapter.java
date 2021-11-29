@@ -14,14 +14,14 @@ public class PetListAdapter extends ArrayAdapter<String> {
     private Activity mContext;
     private  String[] mName;
     private  String[] mLocation;
-    private  Integer[] mImgid;
+    private  Integer[] mImgId;
 
     public PetListAdapter(Activity context, String[] name, String[] location, Integer[] imgId) {
         super(context,R.layout.adopt_pet_list,name);
         this.mContext = context;
         this.mName = name;
         this.mLocation = location;
-        this.mImgid = imgId;
+        this.mImgId = imgId;
     }
 
     public View getView(int position, View view, ViewGroup parent) {
@@ -33,7 +33,7 @@ public class PetListAdapter extends ArrayAdapter<String> {
         TextView subtitleText = (TextView) rowView.findViewById(R.id.subtitle);
 
         titleText.setText(mName[position]);
-        imageView.setImageResource(mImgid[position]);
+        imageView.setImageResource(mImgId[position]);
         subtitleText.setText("location: "+ mLocation[position]);
 
         return rowView;

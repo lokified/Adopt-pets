@@ -9,9 +9,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,11 +39,11 @@ public class PetListActivity extends AppCompatActivity{
     };
 
     Integer[] imgid={
-            R.drawable.logo,R.drawable.logo,
-            R.drawable.logo,R.drawable.logo,
-            R.drawable.logo,R.drawable.logo,
-            R.drawable.logo,R.drawable.logo,
-            R.drawable.logo
+            R.drawable.dog1,R.drawable.garfield,
+            R.drawable.turtle,R.drawable.mice,
+            R.drawable.dog2,R.drawable.dog3,
+            R.drawable.cat1,R.drawable.chihuahua,
+            R.drawable.german
     };
 
     @Override
@@ -52,6 +54,14 @@ public class PetListActivity extends AppCompatActivity{
 
         PetListAdapter adapter = new PetListAdapter(this,petName,location,imgid);
         petList.setAdapter(adapter);
+
+        //toast to show name of pet
+        petList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Toast.makeText(getApplicationContext(), petName[position], Toast.LENGTH_SHORT).show();
+            }
+        });
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");

@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Your Pet</string>
     <string name="invalid_name">please enter your name</string>
+
+    <string-array name="petName">
+        <item>Istinye Park</item>
+        <item>Kanyon Istanbul</item>
+        <item>Akmerkez</item>
+        <item>Forum Istanbul</item>
+        <item>Istanbul Cevahir</item>
+        <item>Metrocity</item>
+        <item>Istanbul Sapphire</item>
+    </string-array>
 </resources>
