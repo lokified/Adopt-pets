@@ -63,6 +63,7 @@ public class PetListActivity extends AppCompatActivity{
             }
         });
 
+        //collect user name
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
         profileName.setText("Welcome \n" + name + "!");

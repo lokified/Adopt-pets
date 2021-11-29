@@ -37,6 +37,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        isAllFieldsChecked = checkAllFields();
+
         if(v == mLoginButton && isAllFieldsChecked) {
             String name = mPersonName.getEditableText().toString();
             Intent intent = new Intent(LoginActivity.this, PetListActivity.class);
@@ -44,9 +46,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             intent.putExtra("name",name);
             startActivity(intent);
         }
-        isAllFieldsChecked = checkAllFields();
+
     }
 
+    //validate the login form
     private Boolean checkAllFields() {
 
         if(mPersonName.length() == 0 ){
@@ -65,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             mPersonPassword.setError("please enter your password");
             return false;
         }
-        else if(mPersonPassword.length() < 8 ) {
+        else if(mPersonPassword.length() < 6) {
             mPersonPassword.setError("password must be minimum 6 characters");
             return false;
         }

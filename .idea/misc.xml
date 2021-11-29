@@ -7,7 +7,7 @@
         <entry key="app/src/main/res/drawable/action_bg.xml" value="0.209375" />
         <entry key="app/src/main/res/drawable/border.xml" value="0.209375" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.209375" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/activity_pet_list.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/adopt_pet_list.xml" value="0.19322916666666667" />
