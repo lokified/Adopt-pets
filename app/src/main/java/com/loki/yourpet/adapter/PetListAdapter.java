@@ -1,4 +1,4 @@
-package com.loki.yourpet;
+package com.loki.yourpet.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.loki.yourpet.R;
+
 public class PetListAdapter extends ArrayAdapter<String> {
 
     private Activity mContext;
@@ -17,7 +19,7 @@ public class PetListAdapter extends ArrayAdapter<String> {
     private  Integer[] mImgId;
 
     public PetListAdapter(Activity context, String[] name, String[] location, Integer[] imgId) {
-        super(context,R.layout.adopt_pet_list,name);
+        super(context, R.layout.adopt_pet_list,name);
         this.mContext = context;
         this.mName = name;
         this.mLocation = location;

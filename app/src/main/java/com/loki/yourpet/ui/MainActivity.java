@@ -1,4 +1,4 @@
-package com.loki.yourpet;
+package com.loki.yourpet.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.loki.yourpet.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

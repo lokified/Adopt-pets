@@ -1,19 +1,18 @@
-package com.loki.yourpet;
+package com.loki.yourpet.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActionBar;
-import android.content.Context;
 import android.content.Intent;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.loki.yourpet.adapter.PetListAdapter;
+import com.loki.yourpet.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
