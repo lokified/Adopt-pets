@@ -1,6 +1,7 @@
 package com.loki.yourpet.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.loki.yourpet.R;
 import com.loki.yourpet.models.Animal;
+import com.loki.yourpet.ui.PetDetailActivity;
 import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -30,7 +34,7 @@ public class AdoptPetListAdapter extends RecyclerView.Adapter<AdoptPetListAdapte
 
     @Override
     public AdoptPetListAdapter.PetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adopt_pet_list,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adopt_pet_list_item,parent,false);
         PetViewHolder viewHolder = new PetViewHolder(view);
         return viewHolder;
     }
@@ -45,7 +49,7 @@ public class AdoptPetListAdapter extends RecyclerView.Adapter<AdoptPetListAdapte
         return mAnimals.size();
     }
 
-    public class PetViewHolder extends RecyclerView.ViewHolder {
+    public class PetViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.petImageView) ImageView mPetImage;
         @BindView(R.id.petName) TextView mPetName;
@@ -57,14 +61,24 @@ public class AdoptPetListAdapter extends RecyclerView.Adapter<AdoptPetListAdapte
             super(itemView);
             mContext = itemView.getContext();
             ButterKnife.bind(this,itemView);
+
+            itemView.setOnClickListener(this);
         }
 
         public void bindAnimal(Animal animal) {
-            Picasso.get().load(animal.getPhotos().get(0).getLarge()).into(mPetImage);
+            Picasso.get().load(animal.getPhotos().toString()).into(mPetImage);
             mPetName.setText(animal.getName());
             mPetDescription.setText(animal.getDescription());
         }
 
+        @Override
+        public void onClick(View v) {
+            int itemPosition = getLayoutPosition();
+            Intent intent = new Intent(mContext, PetDetailActivity.class);
+            intent.putExtra("position", itemPosition);
+            intent.putExtra("animals", Parcels.wrap(mAnimals));
+            mContext.startActivity(intent);
+        }
 
     }
 }
