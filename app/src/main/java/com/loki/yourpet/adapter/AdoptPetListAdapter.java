@@ -47,23 +47,20 @@ public class AdoptPetListAdapter extends RecyclerView.Adapter<AdoptPetListAdapte
 
     public class PetViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.petImageView)
-        ImageView mPetImage;
-        @BindView(R.id.petName)
-        TextView mPetName;
-        @BindView(R.id.descriptionName) TextView mPetDescription;
+        @BindView(R.id.petImageView) ImageView mPetImage;
+        @BindView(R.id.petName) TextView mPetName;
+        @BindView(R.id.descriptionPetText) TextView mPetDescription;
 
         private Context mContext;
 
         public PetViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
             mContext = itemView.getContext();
-
+            ButterKnife.bind(this,itemView);
         }
 
         public void bindAnimal(Animal animal) {
-            Picasso.get().load(animal.getPhotos().get(0).getMedium()).into(mPetImage);
+            Picasso.get().load(animal.getPhotos().get(0).getLarge()).into(mPetImage);
             mPetName.setText(animal.getName());
             mPetDescription.setText(animal.getDescription());
         }
