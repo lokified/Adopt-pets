@@ -5,8 +5,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Generated;
+import org.parceler.Parcel;
 
 @Generated("jsonschema2pojo")
+@Parcel
 public class Photo {
 
     @SerializedName("small")

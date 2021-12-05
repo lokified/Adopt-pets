@@ -1,20 +1,21 @@
 
 package com.loki.yourpet.models;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Generated;
+import org.parceler.Parcel;
 
+@Parcel
 @Generated("jsonschema2pojo")
 public class Address {
 
     @SerializedName("address1")
     @Expose
-    private Object address1;
-    @SerializedName("address2")
-    @Expose
-    private Object address2;
+    private String address1;
     @SerializedName("city")
     @Expose
     private String city;
@@ -38,16 +39,14 @@ public class Address {
     /**
      * 
      * @param country
-     * @param address2
      * @param city
      * @param address1
      * @param postcode
      * @param state
      */
-    public Address(Object address1, Object address2, String city, String state, String postcode, String country) {
+    public Address(String address1, String city, String state, String postcode, String country) {
         super();
         this.address1 = address1;
-        this.address2 = address2;
         this.city = city;
         this.state = state;
         this.postcode = postcode;
@@ -58,16 +57,8 @@ public class Address {
         return address1;
     }
 
-    public void setAddress1(Object address1) {
+    public void setAddress1(String address1) {
         this.address1 = address1;
-    }
-
-    public Object getAddress2() {
-        return address2;
-    }
-
-    public void setAddress2(Object address2) {
-        this.address2 = address2;
     }
 
     public String getCity() {
@@ -100,6 +91,12 @@ public class Address {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return String.format("%s, %s, %s %s", this.address1, this.city, this.state, this.country);
     }
 
 }

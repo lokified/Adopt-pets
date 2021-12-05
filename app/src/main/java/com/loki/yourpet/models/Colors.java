@@ -5,19 +5,17 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Generated;
+import org.parceler.Parcel;
 
+@Parcel
 @Generated("jsonschema2pojo")
 public class Colors {
 
     @SerializedName("primary")
     @Expose
     private String primary;
-    @SerializedName("secondary")
-    @Expose
-    private Object secondary;
-    @SerializedName("tertiary")
-    @Expose
-    private Object tertiary;
+
+
 
     /**
      * No args constructor for use in serialization
@@ -27,16 +25,11 @@ public class Colors {
     }
 
     /**
-     * 
-     * @param secondary
-     * @param tertiary
      * @param primary
      */
-    public Colors(String primary, Object secondary, Object tertiary) {
+    public Colors(String primary) {
         super();
         this.primary = primary;
-        this.secondary = secondary;
-        this.tertiary = tertiary;
     }
 
     public String getPrimary() {
@@ -47,20 +40,5 @@ public class Colors {
         this.primary = primary;
     }
 
-    public Object getSecondary() {
-        return secondary;
-    }
-
-    public void setSecondary(Object secondary) {
-        this.secondary = secondary;
-    }
-
-    public Object getTertiary() {
-        return tertiary;
-    }
-
-    public void setTertiary(Object tertiary) {
-        this.tertiary = tertiary;
-    }
 
 }

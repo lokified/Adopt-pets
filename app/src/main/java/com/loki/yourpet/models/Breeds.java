@@ -5,16 +5,16 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Generated;
+import org.parceler.Parcel;
 
+@Parcel
 @Generated("jsonschema2pojo")
 public class Breeds {
 
     @SerializedName("primary")
     @Expose
     private String primary;
-    @SerializedName("secondary")
-    @Expose
-    private Object secondary;
+
     @SerializedName("mixed")
     @Expose
     private Boolean mixed;
@@ -36,10 +36,9 @@ public class Breeds {
      * @param primary
      * @param unknown
      */
-    public Breeds(String primary, Object secondary, Boolean mixed, Boolean unknown) {
+    public Breeds(String primary, Boolean mixed, Boolean unknown) {
         super();
         this.primary = primary;
-        this.secondary = secondary;
         this.mixed = mixed;
         this.unknown = unknown;
     }
@@ -50,14 +49,6 @@ public class Breeds {
 
     public void setPrimary(String primary) {
         this.primary = primary;
-    }
-
-    public Object getSecondary() {
-        return secondary;
-    }
-
-    public void setSecondary(Object secondary) {
-        this.secondary = secondary;
     }
 
     public Boolean getMixed() {
