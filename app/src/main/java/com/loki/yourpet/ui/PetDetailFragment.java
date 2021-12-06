@@ -1,5 +1,7 @@
 package com.loki.yourpet.ui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -19,7 +21,7 @@ import org.parceler.Parcels;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PetDetailFragment extends Fragment {
+public class PetDetailFragment extends Fragment implements View.OnClickListener {
 
     @BindView(R.id.petImage) ImageView mPetImageLabel;
     @BindView(R.id.petNameTextView) TextView mPetNameLabel;
@@ -27,6 +29,11 @@ public class PetDetailFragment extends Fragment {
     @BindView(R.id.genderTextView) TextView mPetGenderLabel;
     @BindView(R.id.sizeTextView) TextView mPetSizeLabel;
     @BindView(R.id.petDescriptionTextView) TextView mDescriptionLabel;
+    @BindView(R.id.statusTextView) TextView mStatusLabel;
+    @BindView(R.id.websiteTextView) TextView mWebsiteLabel;
+    @BindView(R.id.phoneTextView) TextView mPhoneLabel;
+    @BindView(R.id.emailTextView) TextView mEmailLabel;
+    @BindView(R.id.addressTextView) TextView mAddressLabel;
 
     private Animal mAnimal;
 
@@ -55,13 +62,35 @@ public class PetDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_pet_detail,container,false);
         ButterKnife.bind(this,view);
 
-        Picasso.get().load(mAnimal.getPhotos().get(0).getLarge()).into(mPetImageLabel);
-        mPetNameLabel.setText("Name :" + mAnimal.getName());
-        mPetAgeLabel.setText("Age :"+ mAnimal.getAge());
-        mPetGenderLabel.setText("Gender :"+mAnimal.getGender());
-        mPetSizeLabel.setText("Size :"+mAnimal.getSize());
-        mDescriptionLabel.setText("Description :"+ mAnimal.getDescription());
+        Picasso.get().load(mAnimal.getPhotos().get(0).getSmall()).into(mPetImageLabel);
+        mPetNameLabel.setText("Name : " + mAnimal.getName());
+        mPetAgeLabel.setText("Age : "+ mAnimal.getAge());
+        mPetGenderLabel.setText("Gender : "+mAnimal.getGender());
+        mPetSizeLabel.setText("Size : "+mAnimal.getSize());
+        mDescriptionLabel.setText("Description : "+ mAnimal.getDescription());
+        mAddressLabel.setText(mAnimal.getContact().getAddress().toString());
+        mEmailLabel.setText(mAnimal.getContact().getEmail());
+        mStatusLabel.setText(mAnimal.getStatus());
+        mPhoneLabel.setText(mAnimal.getContact().getPhone());
+
+        mWebsiteLabel.setOnClickListener(this);
+        mPhoneLabel.setOnClickListener(this);
 
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == mWebsiteLabel) {
+            Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse(mAnimal.getUrl()));
+            startActivity(webIntent);
+        }
+
+        if (v == mPhoneLabel) {
+            Intent phoneIntent = new Intent(Intent.ACTION_DIAL,
+                    Uri.parse("tel:" + mAnimal.getContact().getPhone()));
+            startActivity(phoneIntent);
+        }
     }
 }

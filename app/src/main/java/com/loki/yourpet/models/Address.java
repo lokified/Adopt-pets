@@ -96,7 +96,7 @@ public class Address {
     @NonNull
     @Override
     public String toString() {
-        return String.format("%s, %s, %s %s", this.address1, this.city, this.state, this.country);
+        return String.format("%s, %s, %s", this.city, this.state, this.country);
     }
 
 }
