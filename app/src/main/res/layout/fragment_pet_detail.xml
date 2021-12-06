@@ -15,8 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:id="@+id/petImage"
-            android:src="@drawable/pet5"
-            android:scaleType="centerCrop" />
+            android:src="@drawable/tpet"
+            android:scaleType="centerCrop"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -67,13 +67,24 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Brunch, American, tired"
+                android:text="size"
+                android:id="@+id/speciesTextView"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_below="@id/sizeTextView"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="species"
                 android:id="@+id/petDescriptionTextView"
-                android:layout_below="@+id/sizeTextView"
+                android:layout_below="@+id/speciesTextView"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:textColor="@color/black"
                 android:textStyle="italic" />
+
+
 
             <TextView
                 android:layout_width="wrap_content"

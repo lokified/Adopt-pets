@@ -13,11 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YourPet">
         <activity
+            android:name=".ui.PetDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.PetListActivity"
             android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.loki.yourpet.ui.LoginActivity"></meta-data>
+                android:value="com.loki.yourpet.ui.LoginActivity" />
         </activity>
         <activity
             android:name=".ui.LoginActivity"
