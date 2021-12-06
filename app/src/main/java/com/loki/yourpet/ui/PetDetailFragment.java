@@ -14,9 +14,13 @@ import android.widget.TextView;
 
 import com.loki.yourpet.R;
 import com.loki.yourpet.models.Animal;
+import com.loki.yourpet.models.Photo;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +32,7 @@ public class PetDetailFragment extends Fragment implements View.OnClickListener 
     @BindView(R.id.ageTextView) TextView mPetAgeLabel;
     @BindView(R.id.genderTextView) TextView mPetGenderLabel;
     @BindView(R.id.sizeTextView) TextView mPetSizeLabel;
+    @BindView(R.id.speciesTextView) TextView mPetSpeciesLabel;
     @BindView(R.id.petDescriptionTextView) TextView mDescriptionLabel;
     @BindView(R.id.statusTextView) TextView mStatusLabel;
     @BindView(R.id.websiteTextView) TextView mWebsiteLabel;
@@ -62,11 +67,13 @@ public class PetDetailFragment extends Fragment implements View.OnClickListener 
         View view = inflater.inflate(R.layout.fragment_pet_detail,container,false);
         ButterKnife.bind(this,view);
 
-        Picasso.get().load(mAnimal.getPhotos().get(0).getSmall()).into(mPetImageLabel);
+        //Picasso.get().load(mAnimal.getPhotos().get(0).getFull()).into(mPetImageLabel);
+
         mPetNameLabel.setText("Name : " + mAnimal.getName());
         mPetAgeLabel.setText("Age : "+ mAnimal.getAge());
         mPetGenderLabel.setText("Gender : "+mAnimal.getGender());
         mPetSizeLabel.setText("Size : "+mAnimal.getSize());
+        mPetSpeciesLabel.setText("Species : "+ mAnimal.getSpecies());
         mDescriptionLabel.setText("Description : "+ mAnimal.getDescription());
         mAddressLabel.setText(mAnimal.getContact().getAddress().toString());
         mEmailLabel.setText(mAnimal.getContact().getEmail());
