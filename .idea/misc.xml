@@ -15,7 +15,7 @@
         <entry key="app/src/main/res/layout/adopt_pet_list.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/adopt_pet_list_item.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/custom_image.xml" value="0.19322916666666667" />
-        <entry key="app/src/main/res/layout/fragment_pet_detail.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_pet_detail.xml" value="0.25" />
       </map>
     </option>
   </component>

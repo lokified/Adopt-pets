@@ -58,7 +58,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="size"
+                android:text="color"
                 android:id="@+id/sizeTextView"
                 android:textColor="@color/black"
                 android:textStyle="bold"
@@ -67,7 +67,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="size"
+                android:text="species"
                 android:id="@+id/speciesTextView"
                 android:textColor="@color/black"
                 android:textStyle="bold"
@@ -76,9 +76,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="species"
+                android:text="breed"
+                android:id="@+id/breedTextView"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_below="@id/speciesTextView"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="description"
                 android:id="@+id/petDescriptionTextView"
-                android:layout_below="@+id/speciesTextView"
+                android:layout_below="@+id/breedTextView"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:textColor="@color/black"

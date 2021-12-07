@@ -39,6 +39,7 @@ public class PetDetailFragment extends Fragment implements View.OnClickListener 
     @BindView(R.id.phoneTextView) TextView mPhoneLabel;
     @BindView(R.id.emailTextView) TextView mEmailLabel;
     @BindView(R.id.addressTextView) TextView mAddressLabel;
+    @BindView(R.id.breedTextView) TextView mBreedLabel;
 
     private Animal mAnimal;
 
@@ -74,6 +75,7 @@ public class PetDetailFragment extends Fragment implements View.OnClickListener 
         mPetGenderLabel.setText("Gender : "+mAnimal.getGender());
         mPetSizeLabel.setText("Size : "+mAnimal.getSize());
         mPetSpeciesLabel.setText("Species : "+ mAnimal.getSpecies());
+        mBreedLabel.setText("Breed : "+ mAnimal.getBreeds().getPrimary());
         mDescriptionLabel.setText("Description : "+ mAnimal.getDescription());
         mAddressLabel.setText(mAnimal.getContact().getAddress().toString());
         mEmailLabel.setText(mAnimal.getContact().getEmail());

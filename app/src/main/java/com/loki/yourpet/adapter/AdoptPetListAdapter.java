@@ -71,7 +71,10 @@ public class AdoptPetListAdapter extends RecyclerView.Adapter<AdoptPetListAdapte
         }
 
         public void bindAnimal(Animal animal) {
-            //Picasso.get().load(animal.getPhotos().get(0).getFull()).into(mPetImage);
+//            Picasso.get().load(animal.getPhotos().get(0).getFull())
+//                    .placeholder(R.drawable.tpet)
+//                    .error(R.drawable.broken)
+//                    .into(mPetImage);
             mPetName.setText(animal.getName());
             mPetDescription.setText(animal.getDescription());
         }
