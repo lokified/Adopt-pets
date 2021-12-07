@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Your Pet</string>
+    <string name="invalid_name">please enter your name</string>
+</resources>
