@@ -54,13 +54,13 @@ public class PetListActivity extends AppCompatActivity implements View.OnClickLi
 
         mSearchButton.setOnClickListener(this);
 
-        hideProgressBar();
     }
 
     @Override
     public void onClick(View v) {
 
         if(v == mSearchButton) {
+            hideProgressBar();
 
             String type = mPetType.getEditableText().toString();
 

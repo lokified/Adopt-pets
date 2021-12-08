@@ -45,21 +45,6 @@ public class Animal {
     @SerializedName("coat")
     @Expose
     private String coat;
-    @SerializedName("name")
-    @Expose
-    private String name;
-    @SerializedName("description")
-    @Expose
-    private String description;
-    @SerializedName("photos")
-    @Expose
-    private List<Photo> photos = null;
-    @SerializedName("videos")
-    @Expose
-    private List<Video> videos = null;
-    @SerializedName("status")
-    @Expose
-    private String status;
     @SerializedName("attributes")
     @Expose
     private Attributes attributes;
@@ -69,15 +54,36 @@ public class Animal {
     @SerializedName("tags")
     @Expose
     private List<String> tags = null;
-    @SerializedName("contact")
+    @SerializedName("name")
     @Expose
-    private Contact contact;
+    private String name;
+    @SerializedName("description")
+    @Expose
+    private String description;
+    @SerializedName("organization_animal_id")
+    @Expose
+    private String organizationAnimalId;
+    @SerializedName("photos")
+    @Expose
+    private List<Photo> photos = null;
+    @SerializedName("primary_photo_cropped")
+    @Expose
+    private PrimaryPhotoCropped primaryPhotoCropped;
+    @SerializedName("videos")
+    @Expose
+    private List<Video> videos = null;
+    @SerializedName("status")
+    @Expose
+    private String status;
+    @SerializedName("status_changed_at")
+    @Expose
+    private String statusChangedAt;
     @SerializedName("published_at")
     @Expose
     private String publishedAt;
-    @SerializedName("distance")
+    @SerializedName("contact")
     @Expose
-    private Double distance;
+    private Contact contact;
     @SerializedName("_links")
     @Expose
     private Links links;
@@ -93,29 +99,32 @@ public class Animal {
      * 
      * @param gender
      * @param distance
-     * @param publishedAt
      * @param description
      * @param videos
      * @param type
      * @param photos
-     * @param url
      * @param colors
      * @param breeds
-     * @param tags
      * @param organizationId
+     * @param statusChangedAt
+     * @param organizationAnimalId
+     * @param contact
+     * @param links
+     * @param id
+     * @param publishedAt
+     * @param url
+     * @param primaryPhotoCropped
+     * @param tags
      * @param coat
      * @param environment
      * @param size
      * @param species
-     * @param contact
      * @param name
      * @param attributes
-     * @param links
-     * @param id
      * @param age
      * @param status
      */
-    public Animal(Integer id, String organizationId, String url, String type, String species, Breeds breeds, Colors colors, String age, String gender, String size, String coat, String name, String description, List<Photo> photos, List<Video> videos, String status, Attributes attributes, Environment environment, List<String> tags, Contact contact, String publishedAt, Double distance, Links links) {
+    public Animal(Integer id, String organizationId, String url, String type, String species, Breeds breeds, Colors colors, String age, String gender, String size, String coat, Attributes attributes, Environment environment, List<String> tags, String name, String description, String organizationAnimalId, List<Photo> photos, PrimaryPhotoCropped primaryPhotoCropped, List<Video> videos, String status, String statusChangedAt, String publishedAt, Contact contact, Links links) {
         super();
         this.id = id;
         this.organizationId = organizationId;
@@ -128,17 +137,19 @@ public class Animal {
         this.gender = gender;
         this.size = size;
         this.coat = coat;
-        this.name = name;
-        this.description = description;
-        this.photos = photos;
-        this.videos = videos;
-        this.status = status;
         this.attributes = attributes;
         this.environment = environment;
         this.tags = tags;
-        this.contact = contact;
+        this.name = name;
+        this.description = description;
+        this.organizationAnimalId = organizationAnimalId;
+        this.photos = photos;
+        this.primaryPhotoCropped = primaryPhotoCropped;
+        this.videos = videos;
+        this.status = status;
+        this.statusChangedAt = statusChangedAt;
         this.publishedAt = publishedAt;
-        this.distance = distance;
+        this.contact = contact;
         this.links = links;
     }
 
@@ -230,46 +241,6 @@ public class Animal {
         this.coat = coat;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<Photo> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(List<Photo> photos) {
-        this.photos = photos;
-    }
-
-    public List<Video> getVideos() {
-        return videos;
-    }
-
-    public void setVideos(List<Video> videos) {
-        this.videos = videos;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public Attributes getAttributes() {
         return attributes;
     }
@@ -294,12 +265,68 @@ public class Animal {
         this.tags = tags;
     }
 
-    public Contact getContact() {
-        return contact;
+    public String getName() {
+        return name;
     }
 
-    public void setContact(Contact contact) {
-        this.contact = contact;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getOrganizationAnimalId() {
+        return organizationAnimalId;
+    }
+
+    public void setOrganizationAnimalId(String organizationAnimalId) {
+        this.organizationAnimalId = organizationAnimalId;
+    }
+
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
+    }
+
+    public PrimaryPhotoCropped getPrimaryPhotoCropped() {
+        return primaryPhotoCropped;
+    }
+
+    public void setPrimaryPhotoCropped(PrimaryPhotoCropped primaryPhotoCropped) {
+        this.primaryPhotoCropped = primaryPhotoCropped;
+    }
+
+    public List<Video> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(List<Video> videos) {
+        this.videos = videos;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatusChangedAt() {
+        return statusChangedAt;
+    }
+
+    public void setStatusChangedAt(String statusChangedAt) {
+        this.statusChangedAt = statusChangedAt;
     }
 
     public String getPublishedAt() {
@@ -310,12 +337,12 @@ public class Animal {
         this.publishedAt = publishedAt;
     }
 
-    public Double getDistance() {
-        return distance;
+    public Contact getContact() {
+        return contact;
     }
 
-    public void setDistance(Double distance) {
-        this.distance = distance;
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 
     public Links getLinks() {

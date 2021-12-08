@@ -14,13 +14,9 @@ import android.widget.TextView;
 
 import com.loki.yourpet.R;
 import com.loki.yourpet.models.Animal;
-import com.loki.yourpet.models.Photo;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,7 +64,7 @@ public class PetDetailFragment extends Fragment implements View.OnClickListener 
         View view = inflater.inflate(R.layout.fragment_pet_detail,container,false);
         ButterKnife.bind(this,view);
 
-        //Picasso.get().load(mAnimal.getPhotos().get(0).getFull()).into(mPetImageLabel);
+        //Picasso.get().load(mAnimal.getPrimaryPhotoCropped().getSmall()).into(mPetImageLabel);
 
         mPetNameLabel.setText("Name : " + mAnimal.getName());
         mPetAgeLabel.setText("Age : "+ mAnimal.getAge());
@@ -88,6 +84,7 @@ public class PetDetailFragment extends Fragment implements View.OnClickListener 
         return view;
     }
 
+    //implicit intents
     @Override
     public void onClick(View v) {
         if (v == mWebsiteLabel) {
