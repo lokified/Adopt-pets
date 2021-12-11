@@ -10,10 +10,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.loki.yourpet.Constants;
@@ -60,11 +64,49 @@ public class PetListActivity extends AppCompatActivity{
         mSharedPreference = PreferenceManager.getDefaultSharedPreferences(this);
         mRecentPet = mSharedPreference.getString(Constants.PET_TYPE_KEY, null);
 
+        if (mRecentPet != null) {
+            fetchPets(mRecentPet);
+        }
 
-        //connects to API
+
+    }
+
+    //inflate the search menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search, menu);
+        ButterKnife.bind(this);
+
+        mSharedPreference = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreference.edit();
+
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String type) {
+                addToSharedPreference(type);
+                fetchPets(type);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        return true;
+
+    }
+
+    //connects to API
+    public void fetchPets(String type) {
         PetFinderAPI client = PetFinderClient.getClient();
 
-        Call<Animals> call = client.getAnimals(mRecentPet);
+        Call<Animals> call = client.getAnimals(type);
 
         call.enqueue(new Callback<Animals>() {
             @Override
