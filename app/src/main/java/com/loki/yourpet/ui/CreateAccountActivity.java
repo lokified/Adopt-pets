@@ -10,6 +10,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,9 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     @BindView(R.id.emailEditText) EditText mEmailEditText;
     @BindView(R.id.passwordEditText) EditText mPasswordEditText;
     @BindView(R.id.confirmPasswordEditText) EditText mConfirmPasswordEditText;
+
+    @BindView(R.id.firebaseProgressBar) ProgressBar mSignInProgressBar;
+    @BindView(R.id.loadingTextView) TextView mLoadingSignUp;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -76,11 +80,21 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         String password = mPasswordEditText.getText().toString();
         String confirmPassword = mConfirmPasswordEditText.getText().toString();
 
+        boolean validEmail = isValidEmail(email);
+        boolean validName = isValidName(mName);
+        boolean validPassword = isValidPassword(password,confirmPassword);
+
+        if (!validEmail | !validName | !validPassword) return;
+
+        showProgressBar();
+
         //create user to firebase
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        hideProgressBar();
 
                         if (task.isSuccessful()) {
                             createFireBaseUserProfile(Objects.requireNonNull(task.getResult().getUser()));
@@ -171,5 +185,17 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
         return true;
 
+    }
+
+    //show progress to user
+    private void showProgressBar() {
+        mSignInProgressBar.setVisibility(View.VISIBLE);
+        mLoadingSignUp.setVisibility(View.VISIBLE);
+        mLoadingSignUp.setText("Sign up process is in progress");
+    }
+
+    private void hideProgressBar() {
+        mSignInProgressBar.setVisibility(View.GONE);
+        mLoadingSignUp.setVisibility(View.GONE);
     }
 }
