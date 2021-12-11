@@ -66,10 +66,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             mPersonPassword.setError("please enter your password");
             return false;
         }
-        else if(mPersonPassword.length() < 6) {
-            mPersonPassword.setError("password must be minimum 6 characters");
-            return false;
-        }
         return true;
     }
 }
