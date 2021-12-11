@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.loki.yourpet.Constants;
 import com.loki.yourpet.adapter.AdoptPetListAdapter;
 import com.loki.yourpet.R;
 import com.loki.yourpet.models.Animal;
@@ -29,14 +32,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PetListActivity extends AppCompatActivity implements View.OnClickListener{
+public class PetListActivity extends AppCompatActivity{
+
+    private SharedPreferences mSharedPreference;
+    private SharedPreferences.Editor mEditor;
+    private String mRecentPet;
 
     @BindView(R.id.recyclerView) RecyclerView petRecyclerView;
     @BindView(R.id.errorTextView) TextView mErrorTextView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
     @BindView(R.id.welcomeTextView) TextView profileName;
-    @BindView(R.id.searchButton) Button mSearchButton;
-    @BindView(R.id.editTextPetType) EditText mPetType;
 
 
     private AdoptPetListAdapter mAdapter;
@@ -52,56 +57,50 @@ public class PetListActivity extends AppCompatActivity implements View.OnClickLi
         String name = intent.getStringExtra("name");
         profileName.setText("Welcome \n" + name + "!");
 
-        mSearchButton.setOnClickListener(this);
+        mSharedPreference = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentPet = mSharedPreference.getString(Constants.PET_TYPE_KEY, null);
 
-    }
 
-    @Override
-    public void onClick(View v) {
+        //connects to API
+        PetFinderAPI client = PetFinderClient.getClient();
 
-        if(v == mSearchButton) {
-            hideProgressBar();
+        Call<Animals> call = client.getAnimals(mRecentPet);
 
-            String type = mPetType.getEditableText().toString();
+        call.enqueue(new Callback<Animals>() {
+            @Override
+            public void onResponse(Call<Animals> call, Response<Animals> response) {
 
-            PetFinderAPI client = PetFinderClient.getClient();
+                hideProgressBar();
+                if (response.isSuccessful()) {
+                    animals = response.body().getAnimals();
 
-            Call<Animals> call = client.getAnimals(type);
+                    mAdapter= new AdoptPetListAdapter(PetListActivity.this,animals);
+                    petRecyclerView.setAdapter(mAdapter);
 
-            call.enqueue(new Callback<Animals>() {
-                @Override
-                public void onResponse(Call<Animals> call, Response<Animals> response) {
+                    RecyclerView.LayoutManager layoutManager =
+                            new LinearLayoutManager(PetListActivity.this);
+                    petRecyclerView.setLayoutManager(layoutManager);
+                    petRecyclerView.setHasFixedSize(true);
 
-                    if (response.isSuccessful()) {
-                        animals = response.body().getAnimals();
-
-                        mAdapter= new AdoptPetListAdapter(PetListActivity.this,animals);
-                        petRecyclerView.setAdapter(mAdapter);
-
-                        RecyclerView.LayoutManager layoutManager =
-                                new LinearLayoutManager(PetListActivity.this);
-                        petRecyclerView.setLayoutManager(layoutManager);
-                        petRecyclerView.setHasFixedSize(true);
-
-                        showAnimals();
-                    }
-
-                    else {
-                        showUnsuccessfulMessage();
-                    }
-
+                    showAnimals();
                 }
 
-                @Override
-                public void onFailure(Call<Animals> call, Throwable t) {
-                    Log.e("Error Message", "onFailure: ",t );
-                    hideProgressBar();
-                    showFailureMessage();
+                else {
+                    showUnsuccessfulMessage();
                 }
-            });
-        }
+
+            }
+
+            @Override
+            public void onFailure(Call<Animals> call, Throwable t) {
+                Log.e("Error Message", "onFailure: ",t );
+                hideProgressBar();
+                showFailureMessage();
+            }
+        });
     }
 
+   //shows progress to the user
     private void showFailureMessage() {
         mErrorTextView.setText("Something went wrong. Please check your Internet connection and try again later");
         mErrorTextView.setVisibility(View.VISIBLE);
@@ -118,6 +117,11 @@ public class PetListActivity extends AppCompatActivity implements View.OnClickLi
 
     private void hideProgressBar() {
         mProgressBar.setVisibility(View.GONE);
+    }
+
+    //adds to shared preference
+    private void addToSharedPreference(String type) {
+        mEditor.putString(Constants.PET_TYPE_KEY,type).apply();
     }
 
 }
