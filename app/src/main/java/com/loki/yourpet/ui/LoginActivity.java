@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loki.yourpet.R;
@@ -17,10 +18,9 @@ import butterknife.ButterKnife;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.loginButton) Button mLoginButton;
-    @BindView(R.id.editTextPersonName) EditText mPersonName;
-    @BindView(R.id.editTextPersonPhone) EditText mPersonPhone;
     @BindView(R.id.editTextPersonEmail) EditText mPersonEmail;
     @BindView(R.id.editTextPersonPassword) EditText mPersonPassword;
+    @BindView(R.id.registerTextView) TextView mRegisterTextView;
 
     Boolean isAllFieldsChecked = false;
 
@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         ButterKnife.bind(this);
 
         mLoginButton.setOnClickListener(this);
+        mRegisterTextView.setOnClickListener(this);
 
     }
 
@@ -38,12 +39,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         isAllFieldsChecked = checkAllFields();
 
+        //logs in user
         if(v == mLoginButton && isAllFieldsChecked) {
-            String name = mPersonName.getEditableText().toString();
             Intent intent = new Intent(LoginActivity.this, PetListActivity.class);
             Toast.makeText(getApplicationContext(),"Login successfully",Toast.LENGTH_SHORT).show();
-            intent.putExtra("name",name);
             startActivity(intent);
+        }
+
+        //navigates to create account activity
+        if (v == mRegisterTextView) {
+            Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
+            startActivity(intent);
+            finish();
         }
 
     }
@@ -51,14 +58,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //validate the login form
     private Boolean checkAllFields() {
 
-        if(mPersonName.length() == 0 ){
-            mPersonName.setError("please input your name");
-            return false;
-        }
-        if(mPersonPhone.length() == 0 ) {
-            mPersonPhone.setError("please input your phone number");
-            return false;
-        }
         if(mPersonEmail.length() == 0 ) {
             mPersonEmail.setError("please input your email");
             return false;

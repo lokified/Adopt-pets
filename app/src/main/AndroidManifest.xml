@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YourPet">
         <activity
+            android:name=".ui.CreateAccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.PetDetailActivity"
             android:exported="false" />
         <activity
