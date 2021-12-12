@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @BindView(R.id.editTextPersonEmail) EditText mPersonEmail;
     @BindView(R.id.editTextPersonPassword) EditText mPersonPassword;
     @BindView(R.id.registerTextView) TextView mRegisterTextView;
+    @BindView(R.id.firebaseProgressBar) ProgressBar mSignInProgressBar;
+    @BindView(R.id.loadingTextView) TextView mLoadingSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(v == mLoginButton) {
             Intent intent = new Intent(LoginActivity.this, PetListActivity.class);
             loginWithPassword();
+            showProgressBar();
             Toast.makeText(getApplicationContext(),"Login successfully",Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
@@ -99,6 +103,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
+                        hideProgressBar();
                         if (!task.isSuccessful()) {
 
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
@@ -119,5 +124,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onStop() {
         super.onStop();
         mAuth.removeAuthStateListener(mAuthListener);
+    }
+
+    //show progress to user
+    private void showProgressBar() {
+        mSignInProgressBar.setVisibility(View.VISIBLE);
+        mLoadingSignUp.setVisibility(View.VISIBLE);
+        mLoadingSignUp.setText("Logging in");
+    }
+
+    private void hideProgressBar() {
+        mSignInProgressBar.setVisibility(View.GONE);
+        mLoadingSignUp.setVisibility(View.GONE);
     }
 }
