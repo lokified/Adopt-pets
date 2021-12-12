@@ -1,5 +1,6 @@
 package com.loki.yourpet.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +20,10 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.loki.yourpet.Constants;
 import com.loki.yourpet.adapter.AdoptPetListAdapter;
 import com.loki.yourpet.R;
@@ -42,6 +46,9 @@ public class PetListActivity extends AppCompatActivity{
     private SharedPreferences.Editor mEditor;
     private String mRecentPet;
 
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
     @BindView(R.id.recyclerView) RecyclerView petRecyclerView;
     @BindView(R.id.errorTextView) TextView mErrorTextView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
@@ -57,9 +64,6 @@ public class PetListActivity extends AppCompatActivity{
         setContentView(R.layout.activity_pet_list);
         ButterKnife.bind(this);
 
-        Intent intent = getIntent();
-        String name = intent.getStringExtra("name");
-        profileName.setText("Welcome \n" + name + "!");
 
         mSharedPreference = PreferenceManager.getDefaultSharedPreferences(this);
         mRecentPet = mSharedPreference.getString(Constants.PET_TYPE_KEY, null);
@@ -67,6 +71,19 @@ public class PetListActivity extends AppCompatActivity{
         if (mRecentPet != null) {
             fetchPets(mRecentPet);
         }
+
+        //display name of user
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    profileName.setText("Welcome \n "+ user.getDisplayName());
+                }
+            }
+        };
 
 
     }
@@ -76,6 +93,7 @@ public class PetListActivity extends AppCompatActivity{
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_search, menu);
+        inflater.inflate(R.menu.menu_main,menu);
         ButterKnife.bind(this);
 
         mSharedPreference = PreferenceManager.getDefaultSharedPreferences(this);
@@ -164,6 +182,44 @@ public class PetListActivity extends AppCompatActivity{
     //adds to shared preference
     private void addToSharedPreference(String type) {
         mEditor.putString(Constants.PET_TYPE_KEY,type).apply();
+    }
+
+    //selects the log out item in menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        int id = menuItem.getItemId();
+
+        if(id == R.id.action_logout) {
+            logOut();
+            Toast.makeText(getApplicationContext(), "You are logged out", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(menuItem);
+    }
+
+
+    //logs out the user
+    public void logOut() {
+        FirebaseAuth.getInstance().signOut();
+
+        Intent intent = new Intent(PetListActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 
 }
