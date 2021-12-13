@@ -88,6 +88,8 @@ public class Animal {
     @Expose
     private Links links;
 
+    private String pushId;
+
     /**
      * No args constructor for use in serialization
      * 
@@ -353,4 +355,11 @@ public class Animal {
         this.links = links;
     }
 
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
+    }
 }

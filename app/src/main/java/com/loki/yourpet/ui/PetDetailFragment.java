@@ -9,9 +9,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.loki.yourpet.Constants;
 import com.loki.yourpet.R;
 import com.loki.yourpet.models.Animal;
 import com.squareup.picasso.Picasso;
@@ -36,6 +43,7 @@ public class PetDetailFragment extends Fragment implements View.OnClickListener 
     @BindView(R.id.emailTextView) TextView mEmailLabel;
     @BindView(R.id.addressTextView) TextView mAddressLabel;
     @BindView(R.id.breedTextView) TextView mBreedLabel;
+    @BindView(R.id.adoptPetButton) Button mAdoptPetButton;
 
     private Animal mAnimal;
 
@@ -80,6 +88,7 @@ public class PetDetailFragment extends Fragment implements View.OnClickListener 
 
         mWebsiteLabel.setOnClickListener(this);
         mPhoneLabel.setOnClickListener(this);
+        mAdoptPetButton.setOnClickListener(this);
 
         return view;
     }
@@ -97,6 +106,21 @@ public class PetDetailFragment extends Fragment implements View.OnClickListener 
             Intent phoneIntent = new Intent(Intent.ACTION_DIAL,
                     Uri.parse("tel:" + mAnimal.getContact().getPhone()));
             startActivity(phoneIntent);
+        }
+
+        if (v == mAdoptPetButton) {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
+            DatabaseReference restaurantRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_PET)
+                    .child(uid);
+
+            DatabaseReference pushRef = restaurantRef.push();
+            String pushId = pushRef.getKey();
+            mAnimal.setPushId(pushId);
+            pushRef.setValue(mAnimal);
+            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
     }
 }
