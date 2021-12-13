@@ -4,6 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/pet4"
+        android:layout_marginTop="40dp"/>
 
     <TextView
         android:id="@+id/createtextView"
@@ -14,7 +20,9 @@
         android:layout_marginTop="113dp"
         android:text="Create Account"
         android:textSize="40sp"
-        android:textColor="@color/cyan"/>
+        android:textColor="@color/cyan"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_bold"/>
 
     <LinearLayout
         android:orientation="vertical"
@@ -88,7 +96,8 @@
             android:padding="10dp"
             android:text="Sign up"
             android:textSize="20sp"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:fontFamily="@font/poppins_bold"/>
 
         <TextView
             android:id="@+id/loginTextView"
