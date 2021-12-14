@@ -1,10 +1,10 @@
-# YourPet
+# Adopt a Pet
 This is an application to find your favorite pet to adopt.
 
 ## By Sheldon Okware.
 
 ## Description
-Your pet is an application that lets you search for a pet to adopt and you can also search organisation that deals with pets. The pets can be searched according to the location, breed, type of the animal.
+Your pet is an application that lets you search for a pet to adopt. The pets can be searched according to the type of the animal. After the search a user can save the pet of his/her own choice.
 
 ## Prerequisites
 1. Java
@@ -23,6 +23,7 @@ Your pet is an application that lets you search for a pet to adopt and you can a
 
 ## Technologies Used
 * JAVA.
+* FIREBASE.
 
 ## Repo link
 *  'https://github.com/lokified/YourPet'
