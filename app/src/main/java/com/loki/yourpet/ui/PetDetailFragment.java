@@ -108,15 +108,16 @@ public class PetDetailFragment extends Fragment implements View.OnClickListener 
             startActivity(phoneIntent);
         }
 
+        //save button
         if (v == mAdoptPetButton) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String uid = user.getUid();
-            DatabaseReference restaurantRef = FirebaseDatabase
+            DatabaseReference petRef = FirebaseDatabase
                     .getInstance()
                     .getReference(Constants.FIREBASE_CHILD_PET)
                     .child(uid);
 
-            DatabaseReference pushRef = restaurantRef.push();
+            DatabaseReference pushRef = petRef.push();
             String pushId = pushRef.getKey();
             mAnimal.setPushId(pushId);
             pushRef.setValue(mAnimal);
