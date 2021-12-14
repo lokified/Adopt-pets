@@ -112,7 +112,8 @@
             android:padding="10dp"
             android:text="Login"
             android:textSize="18sp"
-            android:fontFamily="@font/poppins_bold"/>
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/registerTextView"

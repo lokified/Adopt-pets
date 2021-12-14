@@ -32,9 +32,9 @@ public class FireBasePetViewHolder extends RecyclerView.ViewHolder implements Vi
     View mView;
     Context mContext;
 
-    @BindView(R.id.petImageView) ImageView mPetImage;
-    @BindView(R.id.petName) TextView mPetName;
-    @BindView(R.id.descriptionPetText) TextView mPetDescription;
+    //@BindView(R.id.petImageView) ImageView mPetImage;
+    //@BindView(R.id.petName) TextView mPetName;
+    //@BindView(R.id.descriptionPetText) TextView mPetDescription;
 
     public FireBasePetViewHolder(View itemView) {
         super(itemView);
@@ -45,6 +45,9 @@ public class FireBasePetViewHolder extends RecyclerView.ViewHolder implements Vi
     }
 
     public void bindAnimal(Animal animal) {
+
+        TextView mPetName = mView.findViewById(R.id.petImageView);
+        TextView mPetDescription = mView.findViewById(R.id.descriptionPetText);
         //Picasso.get().load(animal.getPrimaryPhotoCropped().getSmall()).into(mPetImage);
         mPetName.setText(animal.getName());
         mPetDescription.setText(animal.getDescription());

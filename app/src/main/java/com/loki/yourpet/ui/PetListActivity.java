@@ -54,7 +54,6 @@ public class PetListActivity extends AppCompatActivity{
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
     @BindView(R.id.welcomeTextView) TextView profileName;
 
-
     private AdoptPetListAdapter mAdapter;
     public List<Animal> animals;
 
@@ -84,7 +83,6 @@ public class PetListActivity extends AppCompatActivity{
                 }
             }
         };
-
 
     }
 
@@ -192,6 +190,12 @@ public class PetListActivity extends AppCompatActivity{
         if(id == R.id.action_logout) {
             logOut();
             Toast.makeText(getApplicationContext(), "You are logged out", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if (id == R.id.savedPets) {
+            Intent intent = new Intent(PetListActivity.this, SavedPetListActivity.class);
+            startActivity(intent);
             return true;
         }
 

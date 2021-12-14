@@ -3,6 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/savedPets"
+        android:title="Saved Pets"/>
+
+    <item
         android:id="@+id/action_logout"
         android:title="Logout"
         android:visible="true"
