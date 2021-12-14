@@ -2,6 +2,7 @@ package com.loki.yourpet.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.loki.yourpet.Constants;
@@ -38,11 +41,16 @@ public class SavedPetListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pet_list);
         ButterKnife.bind(this);
 
-        mPetReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PET);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+
+        mPetReference = FirebaseDatabase.getInstance()
+                .getReference(Constants.FIREBASE_CHILD_PET)
+                .child(uid);
         setUpFireBaseAdapter();
 
         hideProgressBar();
-        //showPets();
+        showPets();
     }
 
 
@@ -66,6 +74,9 @@ public class SavedPetListActivity extends AppCompatActivity {
                 return new FireBasePetViewHolder(view);
             }
         };
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(mFireBaseAdapter);
     }
 
     @Override
@@ -82,7 +93,7 @@ public class SavedPetListActivity extends AppCompatActivity {
         }
     }
 
-    private void showRestaurants() {
+    private void showPets() {
         mRecyclerView.setVisibility(View.VISIBLE);
     }
 
