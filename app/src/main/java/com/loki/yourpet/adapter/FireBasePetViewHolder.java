@@ -32,10 +32,6 @@ public class FireBasePetViewHolder extends RecyclerView.ViewHolder implements Vi
     View mView;
     Context mContext;
 
-    //@BindView(R.id.petImageView) ImageView mPetImage;
-    //@BindView(R.id.petName) TextView mPetName;
-    //@BindView(R.id.descriptionPetText) TextView mPetDescription;
-
     public FireBasePetViewHolder(View itemView) {
         super(itemView);
         mView = itemView;
@@ -46,9 +42,9 @@ public class FireBasePetViewHolder extends RecyclerView.ViewHolder implements Vi
 
     public void bindAnimal(Animal animal) {
 
-        TextView mPetName = mView.findViewById(R.id.petImageView);
-        TextView mPetDescription = mView.findViewById(R.id.descriptionPetText);
-        //Picasso.get().load(animal.getPrimaryPhotoCropped().getSmall()).into(mPetImage);
+        TextView mPetName =(TextView) mView.findViewById(R.id.petName);
+        TextView mPetDescription = (TextView) mView.findViewById(R.id.descriptionPetText);
+
         mPetName.setText(animal.getName());
         mPetDescription.setText(animal.getDescription());
     }
@@ -56,8 +52,10 @@ public class FireBasePetViewHolder extends RecyclerView.ViewHolder implements Vi
     @Override
     public void onClick(View view) {
         final ArrayList<Animal> animals = new ArrayList<>();
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
+
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PET).child(uid);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -70,7 +68,7 @@ public class FireBasePetViewHolder extends RecyclerView.ViewHolder implements Vi
 
                 Intent intent = new Intent(mContext, PetDetailActivity.class);
                 intent.putExtra("position",itemPosition + "");
-                intent.putExtra("pet", Parcels.wrap(animals));
+                intent.putExtra("animals", Parcels.wrap(animals));
 
                 mContext.startActivity(intent);
             }

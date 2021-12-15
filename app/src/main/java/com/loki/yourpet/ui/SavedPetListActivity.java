@@ -32,7 +32,6 @@ public class SavedPetListActivity extends AppCompatActivity {
     private FirebaseRecyclerAdapter<Animal, FireBasePetViewHolder> mFireBaseAdapter;
 
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
-    @BindView(R.id.errorTextView) TextView mErrorTextView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
 
     @Override

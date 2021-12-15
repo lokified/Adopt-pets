@@ -54,7 +54,8 @@
            android:layout_alignParentEnd="true"
            android:layout_marginTop="30dp"
            android:layout_below="@id/textViewAdopt"
-           android:visibility="gone"/>
+           android:visibility="gone"
+           android:layout_alignParentRight="true"/>
 
 
        <ProgressBar
