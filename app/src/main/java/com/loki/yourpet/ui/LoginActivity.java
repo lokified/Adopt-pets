@@ -66,11 +66,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         //logs in user
         if(v == mLoginButton) {
-            Intent intent = new Intent(LoginActivity.this, PetListActivity.class);
             loginWithPassword();
             showProgressBar();
-            Toast.makeText(getApplicationContext(),"Login successfully",Toast.LENGTH_SHORT).show();
-            startActivity(intent);
+
         }
 
         //navigates to create account activity
@@ -107,6 +105,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (!task.isSuccessful()) {
 
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(LoginActivity.this, "Login successful.",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }

@@ -8,72 +8,11 @@
     android:id="@+id/mainList"
     tools:context=".ui.PetListActivity">
 
-    <ImageView
-        android:id="@+id/welcomeImage"
-        android:layout_width="412dp"
-        android:layout_height="449dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="-143dp"
-        android:src="@drawable/pet5" />
-
-    <TextView
-        android:id="@+id/welcomeTextView"
+    <fragment
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:text="Welcome"
-        android:textColor="@color/black"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/roboto"/>
-
-
-
-    <TextView
-        android:id="@+id/textViewAdopt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="167dp"
-        android:fontFamily="@font/roboto"
-        android:text="Adopt pet"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:textStyle="bold" />
-
-       <androidx.recyclerview.widget.RecyclerView
-           android:id="@+id/recyclerView"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_alignParentEnd="true"
-           android:layout_marginTop="30dp"
-           android:layout_below="@id/textViewAdopt"
-           android:visibility="gone"
-           android:layout_alignParentRight="true"/>
-
-
-       <ProgressBar
-           android:id="@+id/progressBar"
-           style="?android:attr/progressBarStyle"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_alignParentBottom="true"
-           android:layout_centerHorizontal="true"
-           android:layout_marginBottom="278dp" />
-
-       <TextView
-           android:id="@+id/errorTextView"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_centerInParent="true"
-           android:layout_margin="16dp"
-           android:visibility="gone"
-           android:textColor="@color/black"/>
+        android:id="@+id/fragmentPetList"
+        android:name="com.loki.yourpet.ui.PetListFragment"
+        tools:layout="@layout/activity_pet_list"/>
 
 </RelativeLayout>
