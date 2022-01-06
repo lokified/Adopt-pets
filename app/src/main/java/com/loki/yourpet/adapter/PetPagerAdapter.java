@@ -13,16 +13,18 @@ import java.util.List;
 public class PetPagerAdapter extends FragmentPagerAdapter {
 
     private List<Animal> mAnimals;
+    private String mSource;
 
 
-    public PetPagerAdapter(@NonNull FragmentManager fm, int behavior, List<Animal> animals) {
+    public PetPagerAdapter(@NonNull FragmentManager fm, int behavior, List<Animal> animals, String source) {
         super(fm, behavior);
         mAnimals = animals;
+        mSource = source;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return PetDetailFragment.newInstance(mAnimals.get(position));
+        return PetDetailFragment.newInstance(mAnimals, position, mSource);
     }
 
     @Override
