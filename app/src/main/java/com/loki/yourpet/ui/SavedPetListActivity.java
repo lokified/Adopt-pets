@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -33,12 +34,17 @@ public class SavedPetListActivity extends AppCompatActivity {
 
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
+    @BindView(R.id.textViewAdopt) TextView mLeadTopic;
+    @BindView(R.id.welcomeTextView) TextView profileName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_list);
         ButterKnife.bind(this);
+
+        mLeadTopic.setText("Saved Pets");
+        profileName.setVisibility(View.GONE);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
