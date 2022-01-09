@@ -20,6 +20,8 @@ import com.loki.yourpet.Constants;
 import com.loki.yourpet.R;
 import com.loki.yourpet.models.Animal;
 import com.loki.yourpet.ui.PetDetailActivity;
+import com.loki.yourpet.util.ItemTouchHelperViewHolder;
+import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
@@ -27,56 +29,47 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 
-public class FireBasePetViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class FireBasePetViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
 
     View mView;
     Context mContext;
+    public ImageView mPetImageView;
 
     public FireBasePetViewHolder(View itemView) {
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
-        itemView.setOnClickListener(this);
-
     }
 
     public void bindAnimal(Animal animal) {
 
+        mPetImageView = (ImageView) mView.findViewById(R.id.myPetImageView);
         TextView mPetName =(TextView) mView.findViewById(R.id.petName);
         TextView mPetDescription = (TextView) mView.findViewById(R.id.descriptionPetText);
 
+        //Picasso.get().load(animal.getPrimaryPhotoCropped().getMedium()).into(mPetImageView);
         mPetName.setText(animal.getName());
         mPetDescription.setText(animal.getDescription());
     }
 
     @Override
-    public void onClick(View view) {
-        final ArrayList<Animal> animals = new ArrayList<>();
+    public void onItemSelected(){
+        //Log.d("Animation", "onItemSelected");
+        // we will add animations here
+        itemView.animate()
+                .alpha(0.7f)
+                .scaleX(0.9f)
+                .scaleY(0.9f)
+                .setDuration(500);
+    }
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
-
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PET).child(uid);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    animals.add(snapshot.getValue(Animal.class));
-                }
-
-                int itemPosition = getLayoutPosition();
-
-                Intent intent = new Intent(mContext, PetDetailActivity.class);
-                intent.putExtra("position",itemPosition + "");
-                intent.putExtra("animals", Parcels.wrap(animals));
-
-                mContext.startActivity(intent);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+    @Override
+    public void onItemClear(){
+        //Log.d("Animation", "onItemClear");
+        // we will add animations here
+        itemView.animate()
+                .alpha(1f)
+                .scaleX(1f)
+                .scaleY(1f);
     }
 }
