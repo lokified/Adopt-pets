@@ -1,5 +1,6 @@
 package com.loki.yourpet.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import com.loki.yourpet.models.Animal;
 import com.loki.yourpet.models.Animals;
 import com.loki.yourpet.network.PetFinderAPI;
 import com.loki.yourpet.network.PetFinderClient;
+import com.loki.yourpet.util.OnSelectedPetListener;
 
 import java.util.List;
 
@@ -56,6 +58,7 @@ public class PetListFragment extends Fragment {
 
     private AdoptPetListAdapter mAdapter;
     public List<Animal> animals;
+    private OnSelectedPetListener mOnSelectedPetListener;
 
 
     public PetListFragment() {
@@ -70,18 +73,6 @@ public class PetListFragment extends Fragment {
         mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mEditor = mSharedPreference.edit();
 
-        //display name of user
-        mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    profileName.setText("Welcome \n "+ user.getDisplayName());
-                }
-            }
-        };
 
         // Instructs fragment to include menu options:
         setHasOptionsMenu(true);
@@ -101,9 +92,33 @@ public class PetListFragment extends Fragment {
             fetchPets(mRecentPet);
         }
 
+        //display name of user
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    profileName.setText("Welcome \n "+ user.getDisplayName());
+                }
+            }
+        };
 
 
         return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            mOnSelectedPetListener = (OnSelectedPetListener) context;
+        }
+        catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + e.getMessage());
+        }
     }
 
     //connects to API
@@ -123,7 +138,7 @@ public class PetListFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            mAdapter= new AdoptPetListAdapter(getActivity(),animals);
+                            mAdapter= new AdoptPetListAdapter(getActivity(),animals,mOnSelectedPetListener);
                             petRecyclerView.setAdapter(mAdapter);
 
                             RecyclerView.LayoutManager layoutManager =
@@ -229,5 +244,18 @@ public class PetListFragment extends Fragment {
     //adds to shared preference
     private void addToSharedPreference(String type) {
         mEditor.putString(Constants.PET_TYPE_KEY,type).apply();
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 }
