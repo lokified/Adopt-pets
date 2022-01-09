@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -49,7 +50,7 @@ public class PetDetailFragment extends Fragment implements View.OnClickListener 
     @BindView(R.id.emailTextView) TextView mEmailLabel;
     @BindView(R.id.addressTextView) TextView mAddressLabel;
     @BindView(R.id.breedTextView) TextView mBreedLabel;
-    @BindView(R.id.adoptPetButton) Button mAdoptPetButton;
+    @BindView(R.id.savePetButton) Button mSavePetButton;
 
     private List<Animal> mAnimals;
     private Animal mAnimal;
@@ -73,9 +74,8 @@ public class PetDetailFragment extends Fragment implements View.OnClickListener 
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        assert  getArguments() != null;
         mAnimals = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_KEY_ANIMALS));
         mPosition = getArguments().getInt(Constants.EXTRA_KEY_POSITION);
         mAnimal = mAnimals.get(mPosition);
@@ -109,10 +109,10 @@ public class PetDetailFragment extends Fragment implements View.OnClickListener 
 
         //hides or show save button
         if (mSource.equals(Constants.SOURCE_SAVED)) {
-            mAdoptPetButton.setVisibility(View.GONE);
+            mSavePetButton.setVisibility(View.GONE);
         }
         else {
-            mAdoptPetButton.setOnClickListener(this);
+            mSavePetButton.setOnClickListener(this);
         }
 
         return view;
@@ -134,40 +134,18 @@ public class PetDetailFragment extends Fragment implements View.OnClickListener 
         }
 
         //save button
-        if (v == mAdoptPetButton) {
+        if (v == mSavePetButton) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String uid = user.getUid();
             DatabaseReference petRef = FirebaseDatabase
                     .getInstance()
                     .getReference(Constants.FIREBASE_CHILD_PET)
                     .child(uid);
-
-            //notify if pet is already saved
-            String name = mAnimal.getName();
-
-            petRef.orderByChild("name").equalTo(name).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                    if (snapshot.exists()) {
-                        Toast.makeText(getContext(), "Currently Selected Restaurant already exists", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    else {
-                        DatabaseReference pushRef = petRef.push();
-                        String pushId = pushRef.getKey();
-                        mAnimal.setPushId(pushId);
-                        pushRef.setValue(mAnimal);
-                        Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-
+            DatabaseReference pushRef = petRef.push();
+            String pushId = pushRef.getKey();
+            mAnimal.setPushId(pushId);
+            pushRef.setValue(mAnimal);
+            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
 
         }
     }
