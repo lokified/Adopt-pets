@@ -90,6 +90,8 @@ public class Animal {
 
     private String pushId;
 
+    String index;
+
     /**
      * No args constructor for use in serialization
      * 
@@ -153,6 +155,7 @@ public class Animal {
         this.publishedAt = publishedAt;
         this.contact = contact;
         this.links = links;
+        this.index = "not_specified";
     }
 
     public Integer getId() {
@@ -361,5 +364,13 @@ public class Animal {
 
     public void setPushId(String pushId) {
         this.pushId = pushId;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
     }
 }

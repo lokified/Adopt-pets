@@ -7,6 +7,11 @@
         <entry key="app/src/main/res/drawable/action_bg.xml" value="0.209375" />
         <entry key="app/src/main/res/drawable/border.xml" value="0.209375" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.209375" />
+        <entry key="app/src/main/res/layout-land/activity_pet_list.xml" value="0.16875" />
+        <entry key="app/src/main/res/layout-land/activity_saved_pet_list.xml" value="0.16875" />
+        <entry key="app/src/main/res/layout-land/adopt_pet_list_item.xml" value="0.16875" />
+        <entry key="app/src/main/res/layout-land/fragment_pet_detail.xml" value="0.16875" />
+        <entry key="app/src/main/res/layout-land/pet_list_item_drag.xml" value="0.16875" />
         <entry key="app/src/main/res/layout/activity_adopt_pet.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/activity_create_account.xml" value="0.17760416666666667" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.22" />
@@ -20,6 +25,7 @@
         <entry key="app/src/main/res/layout/fragment_pet_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_pet_list.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_saved_pet_list.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/pet_list_item_drag.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/menu/menu_search.xml" value="0.19322916666666667" />
       </map>
