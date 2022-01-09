@@ -8,8 +8,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/cyan">
+        android:layout_height="match_parent">
 
         <ImageView
             android:layout_width="match_parent"
@@ -119,7 +118,8 @@
                 android:layout_alignParentStart="true"
                 android:paddingLeft="30dp"
                 android:paddingTop="20dp"
-                android:paddingRight="30dp">
+                android:paddingRight="30dp"
+                android:background="@color/cyan">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -177,7 +177,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:text="Save Pet"
-                android:id="@+id/adoptPetButton"
+                android:id="@+id/savePetButton"
                 android:layout_alignParentBottom="true"
                 android:backgroundTint="@color/black"
                 android:textColor="@color/white"
